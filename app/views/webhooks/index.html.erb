@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Webhooks</h1>
+
+<div id="webhooks">
+  <table>
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Document</th>
+        <th>Endpoint</th>
+        <th>Token</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @webhooks.each do |webhook| %>
+        <tr id="<%= dom_id webhook %>">
+          <td><%= link_to "#{webhook.customer.name}", webhook.customer %> </td>
+          <td><%= webhook.document.description %></td>
+          <td><%= webhook.customer.endpoint %></td>
+          <td><%= webhook.token %></td>
+          <td><%= link_to 'Edit', edit_webhook_path(webhook) %></td>
+        </tr>
+      <% end %>
+  </table>
+</div>
+
+<%= link_to "New webhook", new_webhook_path %>

@@ -10,16 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_024915) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_102121) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+    t.string "endpoint"
+    t.string "bucket"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.string "description"
     t.date "expiry_date"
     t.string "link"
+    t.string "key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "webhooks", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "document_id", null: false
+    t.text "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_webhooks_on_customer_id"
+    t.index ["document_id"], name: "index_webhooks_on_document_id"
+  end
+
+  add_foreign_key "webhooks", "customers"
+  add_foreign_key "webhooks", "documents"
 end

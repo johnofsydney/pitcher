@@ -41,16 +41,21 @@ class DocumentsController < ApplicationController
   def update
     file = params[:document][:file]
     bucket = S3.new(S3::BUCKET)
+    key = "document-#{Time.zone.today}-#{file.original_filename}"
     upload_results = bucket.put_object(
-      key: "document-#{Time.zone.today}-#{file.original_filename}",
+      key: key,
       body: file.tempfile
     )
     link = upload_results[:address]
 
     respond_to do |format|
-      if @document.update(document_params.merge(link: link))
+      if @document.update(
+        document_params.merge(
+          {link: link, key: key}
+        )
+      )
         format.html { redirect_to document_url(@document), notice: "Document was successfully updated." }
-        
+
         HookService.new(@document).call
 
         format.json { render :show, status: :ok, location: @document }

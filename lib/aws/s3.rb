@@ -4,7 +4,7 @@ class S3
   # - make a plural version: put_objects
 
   REGION = 'us-east-1'.freeze
-  BUCKET = 'doolittle-a1'.freeze
+  BUCKET = 'pitcher-bucket'.freeze
 
   attr_reader :bucket
 
@@ -32,14 +32,13 @@ class S3
     }
   end
 
-  def delete_object(key:)
-    # TODO: setup logger
-    # logger.debug "Deleting #{key} from #{bucket}. INFO"
-    # logger.info "Deleting #{key} from #{bucket}. DEBUG"
+  def get_object(key:)
+    client.get_object(bucket: bucket, key: key)
+  end
 
+  def delete_object(key:)
     client.delete_object(bucket: bucket, key: key)
 
-    # TODO: handle error in deletion
     {
       success: true,
       bucket: bucket,
@@ -48,15 +47,13 @@ class S3
   end
 
   def access_key_id
-    # Rails.application.credentials.aws[:access_key_id]
-    'AKIA4POOPICM4WJHAXVC'
+    Rails.application.credentials.aws[:access_key_id]
   rescue NoMethodError => e
     e.inspect # fix for CI
   end
 
   def secret_access_key
-    # Rails.application.credentials.aws[:secret_access_key]
-    'DGm5WVJHPACXEE6If+dtcQGvSC8uvRy736WeRKUt'
+    Rails.application.credentials.aws[:secret_access_key]
   rescue NoMethodError => e
     e.inspect # fix for CI
   end

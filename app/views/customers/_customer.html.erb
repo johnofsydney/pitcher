@@ -1,0 +1,33 @@
+<div id="<%= dom_id customer %>">
+  <p>
+    <strong>Company name:</strong>
+    <%= customer.name %>
+  </p>
+  <p>
+    <strong>URL:</strong>
+    <%= customer.url %>
+  </p>
+  <p>
+    <strong>Endpoint:</strong>
+    <%= customer.endpoint %>
+  </p>
+
+  <div id="webhooks">
+    <table>
+      <thead>
+        <tr>
+          <th>Document</th>
+          <th>Token</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% customer.webhooks.each do |webhook| %>
+          <tr id="<%= dom_id webhook %>">
+            <td><%= webhook.document.description %></td>
+            <td><%= webhook.token %></td>
+            <td><%= link_to 'Edit', edit_webhook_path(webhook) %></td>
+          </tr>
+        <% end %>
+    </table>
+  </div>
+</div>
