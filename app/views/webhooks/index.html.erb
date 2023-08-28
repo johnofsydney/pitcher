@@ -7,6 +7,7 @@
     <thead>
       <tr>
         <th>Customer</th>
+        <th>URL</th>
         <th>Document</th>
         <th>Endpoint</th>
         <th>Token</th>
@@ -16,6 +17,7 @@
       <% @webhooks.each do |webhook| %>
         <tr id="<%= dom_id webhook %>">
           <td><%= link_to "#{webhook.customer.name}", webhook.customer %> </td>
+          <td><%= link_to "#{webhook.customer.url}", webhook.customer.url %> </td>
           <td><%= webhook.document.description %></td>
           <td><%= webhook.customer.endpoint %></td>
           <td><%= webhook.token %></td>

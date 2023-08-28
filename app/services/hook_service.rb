@@ -14,6 +14,7 @@ class HookService
     file = pitcher_s3.get_object(key: @document.key).body.read # document from this database / pitcher bucket
 
     Webhook.where(document: @document).each do |webhook|
+
       # put the file in the customer bucket
       catcher_s3 = S3.new(webhook.customer.bucket)
       save_results = catcher_s3.put_object(
@@ -29,18 +30,19 @@ class HookService
         key: @document.key
       }
 
+      # https://httpbin.org/post
+
       # post payload to the customer endpoint
       conn = Faraday.new(
         url: webhook.customer.url,
         headers: {'Content-Type' => 'application/json'}
       )
-# binding.pry
+
 
       response = conn.post(webhook.customer.endpoint) do |req|
-        req.body = payload
+        req.body = payload.to_json
       end
 
-      puts 'response'
       puts response.body
     end
 

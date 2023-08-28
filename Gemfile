@@ -54,6 +54,7 @@ group :development, :test do
 
   # Use Pry for debugging
   gem "pry-rails"
+  gem 'pry-byebug'
 end
 
 group :development do

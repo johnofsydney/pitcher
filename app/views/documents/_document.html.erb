@@ -18,4 +18,14 @@
     <img src="<%= document.link %>" alt="Document Image">
   </div>
 
+  <h2>Webhooks</h2>
+  <ul>
+    <% document.webhooks.each do |webhook| %>
+      <li>
+        <%= link_to webhook.customer.name, webhook.customer %>
+        (<%= link_to "Show", webhook %>)
+      </li>
+    <% end %>
+  </ul>
+
 </div>

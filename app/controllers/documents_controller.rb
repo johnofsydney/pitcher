@@ -54,11 +54,17 @@ class DocumentsController < ApplicationController
           {link: link, key: key}
         )
       )
-        format.html { redirect_to document_url(@document), notice: "Document was successfully updated." }
+        format.html do
 
-        HookService.new(@document).call
+          HookService.new(@document).call
 
-        format.json { render :show, status: :ok, location: @document }
+
+          redirect_to document_url(@document), notice: "Document was successfully updated."
+        end
+
+
+
+        # format.json { render :show, status: :ok, location: @document }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @document.errors, status: :unprocessable_entity }

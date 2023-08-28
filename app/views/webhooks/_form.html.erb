@@ -11,19 +11,21 @@
     </div>
   <% end %>
 
+  <p>To subscribe a customer to a particular document, select the customer and the document, and a token. The token will be provided by the customer, and is will allow the customer application to uniquely identify match the data from the document in this application to the one in their application.</p>
+
   <div>
     <%= form.label :customer_id, style: "display: block" %>
-    <%= form.text_field :customer_id %>
+    <%= form.select :customer_id, options_for_select(Customer.pluck(:name, :id), include_blank: true) %>
   </div>
 
   <div>
     <%= form.label :document_id, style: "display: block" %>
-    <%= form.text_field :document_id %>
+    <%= form.select :document_id, options_for_select(Document.all.map { |d| [d.description, d.id] }, include_blank: true) %>
   </div>
 
   <div>
-    <%= form.label :customer_url, style: "display: block" %>
-    <%= form.text_area :customer_url %>
+    <%= form.label :token, style: "display: block" %>
+    <%= form.text_area :token %>
   </div>
 
   <div>
