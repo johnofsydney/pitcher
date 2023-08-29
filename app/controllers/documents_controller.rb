@@ -91,7 +91,7 @@ class DocumentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def document_params
       # file is different becuase it is not an attribute of the model / column in the database
-      params.require(:document).permit(:description, :expiry_date, :link)
+      params.require(:document).permit(:description, :expiry_date, :link, :key)
     end
 
 end
