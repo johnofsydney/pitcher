@@ -1,31 +1,17 @@
-<div id="<%= dom_id document %>">
-  <p>
-    <strong>Description:</strong>
-    <%= document.description %>
-  </p>
-
-  <p>
-    <strong>Expiry date:</strong>
-    <%= document.expiry_date %>
-  </p>
-
-  <p>
-    <strong>Link:</strong>
-    <%= document.link %>
-  </p>
-
-  <div>
-    <img src="<%= document.link %>" alt="Document Image">
+<div id="<%= dom_id document %>" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= document.description %></h5>
+    <p class="card-text"><strong>Expiry date:</strong> <%= document.expiry_date %></p>
+    <p class="card-text"><strong>Link:</strong> <%= document.link %></p>
+    <img src="<%= document.link %>" alt="Document Image" class="img-fluid mb-3">
+    <h6 class="card-subtitle mb-2 text-muted">Webhooks</h6>
+    <ul class="list-group list-group-flush">
+      <% document.webhooks.each do |webhook| %>
+        <li class="list-group-item">
+          <%= link_to webhook.customer.name, webhook.customer, class: "text-decoration-none" %>
+          (<%= link_to "Show", webhook, class: "text-decoration-none" %>)
+        </li>
+      <% end %>
+    </ul>
   </div>
-
-  <h2>Webhooks</h2>
-  <ul>
-    <% document.webhooks.each do |webhook| %>
-      <li>
-        <%= link_to webhook.customer.name, webhook.customer %>
-        (<%= link_to "Show", webhook %>)
-      </li>
-    <% end %>
-  </ul>
-
 </div>

@@ -1,23 +1,17 @@
-<div id="<%= dom_id customer %>">
-  <p>
-    <strong>Company name:</strong>
-    <%= customer.name %>
-  </p>
-  <p>
-    <strong>URL:</strong>
-    <%= customer.url %>
-  </p>
-  <p>
-    <strong>Endpoint:</strong>
-    <%= customer.endpoint %>
-  </p>
-
-  <div id="webhooks">
-    <table>
+<div id="<%= dom_id customer %>" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%= customer.name %></h5>
+    <p class="card-text"><strong>URL:</strong> <%= customer.url %></p>
+    <p class="card-text"><strong>Endpoint:</strong> <%= customer.endpoint %></p>
+  </div>
+  <div id="webhooks" class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">Webhooks</h6>
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>Document</th>
           <th>Token</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -25,9 +19,10 @@
           <tr id="<%= dom_id webhook %>">
             <td><%= webhook.document.description %></td>
             <td><%= webhook.token %></td>
-            <td><%= link_to 'Edit', edit_webhook_path(webhook) %></td>
+            <td><%= link_to 'Edit', edit_webhook_path(webhook), class: 'btn btn-primary' %></td>
           </tr>
         <% end %>
+      </tbody>
     </table>
   </div>
 </div>

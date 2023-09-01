@@ -1,32 +1,36 @@
-<p style="color: green"><%= notice %></p>
+<p class="alert alert-success"><%= notice %></p>
 
-<h1>Webhooks</h1>
+<div class="container">
+  <h1>Webhooks</h1>
 
-<div id="webhooks">
-  <table>
-    <thead>
-      <tr>
-        <th>Customer</th>
-        <th>URL</th>
-        <th>Document</th>
-        <th>Endpoint</th>
-        <th>Token</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @webhooks.each do |webhook| %>
-        <tr id="<%= dom_id webhook %>">
-          <td><%= link_to "#{webhook.customer.name}", webhook.customer %> </td>
-          <td><%= link_to "#{webhook.customer.url}", webhook.customer.url %> </td>
-          <td><%= webhook.document.description %></td>
-          <td><%= webhook.customer.endpoint %></td>
-          <td><%= webhook.token %></td>
-          <td><%= link_to 'Edit', edit_webhook_path(webhook) %></td>
+  <div id="webhooks">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>URL</th>
+          <th>Document</th>
+          <th>Endpoint</th>
+          <th>Token</th>
+          <th></th>
         </tr>
-      <% end %>
-  </table>
+      </thead>
+      <tbody>
+        <% @webhooks.each do |webhook| %>
+          <tr id="<%= dom_id webhook %>">
+            <td><%= link_to "#{webhook.customer.name}", webhook.customer, class: "text-decoration-none" %> </td>
+            <td><%= link_to "#{webhook.customer.url}", webhook.customer.url, class: "text-decoration-none" %> </td>
+            <td><%= webhook.document.description %></td>
+            <td><%= webhook.customer.endpoint %></td>
+            <td><%= webhook.token %></td>
+            <td><%= link_to 'Edit', edit_webhook_path(webhook), class: "btn btn-primary" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to "New webhook", new_webhook_path, class: "btn btn-success" %>
+
+  <%= render partial: 'menus/footer' %>
 </div>
-
-<%= link_to "New webhook", new_webhook_path %>
-
-<%= render partial: 'menus/footer' %>

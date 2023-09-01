@@ -1,17 +1,38 @@
-<h1>Home Page for the Library Application</h1>
-<h3>AKA the "Pitcher"</h3>
+<div class="row">
+  <h1>Home Page for the Library Application</h1>
+  <h3>AKA the "Pitcher"</h3>
 
+  <p>This application is the central repository of documents that can be synced to customers own applications, depending on what is relevant for those customers, and what they pay for.</p>
+</div>
 
-<p>This application is the central repository of documents that can be synced to customers own applications, depending on what is relevant for those customers, and what they pay for.</p>
-
-<p>Here is the list of all of the documents</p>
-<%= link_to 'Documents', documents_path %>
-
-<p>And here is the list of all of the customers</p>
-<%= link_to 'Customers', customers_path %>
-
-<p>Which customers are connected to which documents is controlled by the webhooks collection. Each webhook contains the information required to send the data to each specific customer application each time the document is updated.</p>
-<%= link_to 'Webhooks', webhooks_path %>
-
-
-
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Documents</h5>
+        <p class="card-text">Here is a list of all of the documents</p>
+        <%= link_to 'Documents', documents_path %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Customers</h5>
+        <p class="card-text">And here is the list of all of the customers</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <%= link_to 'Customers', customers_path %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Webhooks</h5>
+        <p class="card-text">Which customers are connected to which documents is controlled by the webhooks collection. Each webhook contains the information required to send the data to each specific customer application each time the document is updated..</p>
+        <%= link_to 'Webhooks', webhooks_path %>
+      </div>
+    </div>
+  </div>
+</div>

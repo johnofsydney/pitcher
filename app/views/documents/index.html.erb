@@ -3,14 +3,30 @@
 <h1>Documents</h1>
 
 <div id="documents">
-  <% @documents.each do |document| %>
-    <%= render document %>
-    <p>
-      <%= link_to "Show this document", document %>
-    </p>
-  <% end %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Expiry Date</th>
+        <th>Link</th>
+        <th>Key</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @documents.each do |document| %>
+        <tr>
+          <td><%= document.description %></td>
+          <td><%= document.expiry_date %></td>
+          <td><%= document.link %></td>
+          <td><%= document.key %></td>
+          <td><%= link_to 'Show', document, class: 'btn btn-primary' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New document", new_document_path %>
+<%= link_to "New document", new_document_path, class: "btn btn-success" %>
 
 <%= render partial: 'menus/footer' %>

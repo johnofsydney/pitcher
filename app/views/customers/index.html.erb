@@ -1,15 +1,32 @@
-<p style="color: green"><%= notice %></p>
+<p class="alert alert-success"><%= notice %></p>
 
-<h1>Customers</h1>
+<div class="container">
+  <h1>Customers</h1>
 
-<div id="customers">
-  <% @customers.each do |customer| %>
-    <p>
-      <%= link_to customer.name, customer %>
-    </p>
-  <% end %>
+  <div id="customers">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>URL</th>
+          <th>Endpoint</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+            <td><%= link_to customer.name, customer %></td>
+            <td><%= customer.url %></td>
+            <td><%= customer.endpoint %></td>
+            <td><%= link_to 'Edit', edit_customer_path(customer), class: 'btn btn-primary' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to "New customer", new_customer_path, class: "btn btn-success" %>
+
+  <%= render partial: 'menus/footer' %>
 </div>
-
-<%= link_to "New customer", new_customer_path %>
-
-<%= render partial: 'menus/footer' %>
