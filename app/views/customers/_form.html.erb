@@ -1,6 +1,6 @@
-<%= form_with(model: customer) do |form| %>
+<%= form_with(model: customer, class: "card") do |form| %>
   <% if customer.errors.any? %>
-    <div style="color: red">
+    <div class="card-body bg-danger text-white">
       <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
 
       <ul>
@@ -11,27 +11,29 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="card-body">
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :url, style: "display: block" %>
-    <%= form.text_field :url %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :url, class: "form-label" %>
+      <%= form.text_field :url, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :endpoint, style: "display: block" %>
-    <%= form.text_field :endpoint %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :endpoint, class: "form-label" %>
+      <%= form.text_field :endpoint, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :bucket, style: "display: block" %>
-    <%= form.text_field :bucket %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :bucket, class: "form-label" %>
+      <%= form.text_field :bucket, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit "Save", class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

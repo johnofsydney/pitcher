@@ -1,6 +1,6 @@
-<%= form_with(model: document) do |form| %>
+<%= form_with(model: document, class: "needs-validation", novalidate: true) do |form| %>
   <% if document.errors.any? %>
-    <div style="color: red">
+    <div class="alert alert-danger">
       <h2><%= pluralize(document.errors.count, "error") %> prohibited this document from being saved:</h2>
 
       <ul>
@@ -11,28 +11,39 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: "form-control", required: true %>
+    <div class="invalid-feedback">
+      Please provide a description.
+    </div>
   </div>
 
-  <div>
-    <%= form.label :expiry_date, style: "display: block" %>
-    <%= form.date_field :expiry_date %>
+  <div class="form-group">
+    <%= form.label :expiry_date %>
+    <%= form.date_field :expiry_date, class: "form-control", required: true %>
+    <div class="invalid-feedback">
+      Please provide an expiry date.
+    </div>
   </div>
 
-  <div>
-    <%= form.label :link, style: "display: block" %>
-    <%= form.text_field :link %>
+  <div class="form-group">
+    <%= form.label :link %>
+    <%= form.text_field :link, class: "form-control", required: true %>
+    <div class="invalid-feedback">
+      Please provide a link.
+    </div>
   </div>
 
-  <div>
-    <%= form.label :file, style: "display: block" %>
-    <%= form.file_field :file %>
+  <div class="form-group">
+    <%= form.label :file %>
+    <%= form.file_field :file, class: "form-control-file", required: true %>
+    <div class="invalid-feedback">
+      Please provide a file.
+    </div>
   </div>
 
-
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
