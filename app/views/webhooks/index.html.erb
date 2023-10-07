@@ -1,4 +1,8 @@
-<p class="alert alert-success"><%= notice %></p>
+<% if notice.present? %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+
 
 <div class="container">
   <h1>Webhooks</h1>

@@ -1,21 +1,8 @@
-<div id="<%= dom_id webhook %>">
-  <p>
-    <strong>Customer:</strong>
-    <%= webhook.customer.name %>
-  </p>
-
-  <p>
-    <strong>Document:</strong>
-    <%= webhook.document.description %>
-  </p>
-
-  <p>
-    <strong>webhook endpoint:</strong>
-    <%= webhook.customer.endpoint %>
-  </p>
-  <p>
-    <strong>webhook token:</strong>
-    <%= webhook.token %>
-  </p>
-
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title font-italic" style="margin-bottom: 20px">Webhook [<%= webhook.id %>] for <%= webhook.customer.name %></h5>
+    <p class="card-text"><strong>Document:</strong> <%= webhook.document.description %></p>
+    <p class="card-text"><strong>Webhook endpoint:</strong> <%= webhook.customer.endpoint %></p>
+    <p class="card-text"><strong>Webhook token:</strong> <%= webhook.token %></p>
+  </div>
 </div>

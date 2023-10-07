@@ -2,6 +2,8 @@
   <div class="col-12">
     <h1 class="display-4 text-primary">Pitcher: Library Application</h1>
     <p class="lead">Pitcher application is the central repository of documents that can be automatically synced to subscribing customers.</p>
+    <p class="lead"><i>Damian, Pitcher is our application. Customers pay us to subscribe to the documents in our library.</i></p>
+    <p class="lead">There are two kinds of user accounts for Pitcher; Admin Users are operators of Pitcher, Subscriber Users are customers of Pitcher</p>
   </div>
 </div>
 
@@ -11,7 +13,7 @@
       <div class="card-body">
         <h5 class="card-title text-info">Documents</h5>
         <p class="card-text">Here is a list of all of the documents held in the library</p>
-        <p class="card-text">Only admins users of Pitcher can add new documents or update existing ones.</p>
+        <p class="card-text">Only admin users of Pitcher can add new documents or update existing ones.</p>
         <p class="card-text">Whenever a document is updated, it will automatically be pushed to any customer who has subscribed to it.</p>
       </div>
       <div class="card-footer mt-auto bg-white">
@@ -23,8 +25,8 @@
     <div class="card flex-grow-1 bg-light">
       <div class="card-body">
         <h5 class="card-title text-info">Customers</h5>
-        <p class="card-text">And here is the list of customers, presented for demonstration only.</p>
-        <p class="card-text">In the production application no one will be able to see a list of customers. When a specific user logs in, they will be able to view / edit only their own details.</p>
+        <p class="card-text">And here is the list of customers, only available to admin users of Pitcher.</p>
+        <p class="card-text">When a Subscriber User logs in, they will be able to view / edit only their own details, but not see anyone elses.</p>
       </div>
       <div class="card-footer mt-auto bg-white">
         <%= link_to 'Customers', customers_path, class: 'btn btn-primary' %>
@@ -36,11 +38,27 @@
       <div class="card-body">
         <h5 class="card-title text-info">Webhooks</h5>
         <p class="card-text">Which customers are connected to which documents is controlled by the webhooks collection. Each webhook contains the information required to send the data to each specific customer application each time the document is updated.</p>
-        <p class="card-text">In the production application, only a customer's own webhooks will be visible</p>
+        <p class="card-text">Just like documents, Pitcher Admin Users can see all webhooks, for a Subscriber User, only their own webhooks will be visible</p>
       </div>
       <div class="card-footer mt-auto bg-white">
         <%= link_to 'Webhooks', webhooks_path, class: 'btn btn-primary' %>
       </div>
+    </div>
+  </div>
+
+
+  <div class="row" style="margin-top: 50px">
+    <div class="col-12">
+      <h2 class="display-8 text-primary">TODO:</h2>
+      <ul>
+        <li>Create two seperate User models</li>
+        <li>Add login function (devise)</li>
+        <li>Restrict access as appropriate</li>
+        <li>Add sidekiq and move document pushing to a worker</li>
+        <li>Error handling for customer host not found</li>
+        <li>Consider other push mechanisms</li>
+        <li>Confirm messgae on all destroy actions</li>
+      </ul>
     </div>
   </div>
 </div>

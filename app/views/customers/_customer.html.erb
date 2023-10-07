@@ -1,12 +1,15 @@
 <div id="<%= dom_id customer %>" class="card mb-3">
   <div class="card-body">
-    <h5 class="card-title"><%= customer.name %></h5>
+    <h4 class="card-title"><%= customer.name %></h4>
     <p class="card-text"><strong>URL:</strong> <%= customer.url %></p>
+    <p style="margin-left: 20px; margin-top: -10px"><i>This is the URL for customer's server</i></p>
     <p class="card-text"><strong>Endpoint:</strong> <%= customer.endpoint %></p>
+    <p style="margin-left: 20px; margin-top: -10px"><i>Specific path to which a payload will be sent whenever a subscribed document is updated</i></p>
     <p class="card-text"><strong>Bucket:</strong> <%= customer.bucket %></p>
+    <p style="margin-left: 20px; margin-top: -10px"><i>AWS S3 Bucket. Owned by the customer. Pitcher app has access to add files into this bucket. This access is granted and managed by the customer</i></p>
   </div>
   <div id="webhooks" class="card-body">
-    <h6 class="card-subtitle mb-2 text-muted">Webhooks</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Subscribed Documents (Webhooks)</h6>
     <table class="table table-striped">
       <thead>
         <tr>

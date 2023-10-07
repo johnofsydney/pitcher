@@ -1,4 +1,6 @@
-<p class="alert alert-success"><%= notice %></p>
+<% if notice.present? %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
 
 <div class="container">
   <h1>Customers</h1>
@@ -18,7 +20,7 @@
         <% @customers.each do |customer| %>
           <tr>
             <td><%= link_to customer.name, customer %></td>
-            <td><%= customer.url %></td>
+            <td><%= link_to customer.url, customer.url %></td>
             <td><%= customer.endpoint %></td>
             <td><%= customer.bucket %></td>
             <td><%= link_to 'Edit', edit_customer_path(customer), class: 'btn btn-primary' %></td>
