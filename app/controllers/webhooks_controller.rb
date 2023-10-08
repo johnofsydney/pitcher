@@ -34,10 +34,23 @@ class WebhooksController < ApplicationController
     end
   end
 
+
+
+  def document_has_changed?(params)
+    @webhook.document.id != params[:webhook][:document_id].to_i
+  end
   # PATCH/PUT /webhooks/1 or /webhooks/1.json
   def update
+
+    if document_has_changed?(params)
+      # invoked the hook service to send the new document to the customer
+    else
+    end
+
+
+
     respond_to do |format|
-      if @webhook.update(webhook_params)
+      if @document.update(document_params)
         format.html { redirect_to webhook_url(@webhook), notice: "Webhook was successfully updated." }
         format.json { render :show, status: :ok, location: @webhook }
       else

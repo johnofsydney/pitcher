@@ -15,13 +15,17 @@
     <div class="card mb-3">
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">Customers subscribed to this document (webhooks)</h6>
-        <ul class="list-group list-group-flush">
-          <% document.webhooks.each do |webhook| %>
-            <li class="list-group-item">
-              <%= link_to webhook.customer.name, webhook, class: "text-decoration-none" %>
-            </li>
-          <% end %>
-        </ul>
+        <% if document.webhooks.empty? %>
+        <% else %>
+          <ul class="list-group list-group-flush">
+            <% document.webhooks.each do |webhook| %>
+              <li class="list-group-item">
+                <%= link_to webhook.customer.name, webhook, class: "text-decoration-none" %>
+                <%= webhook.customer.server_online? ? nil : "| Offline" %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>

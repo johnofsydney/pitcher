@@ -14,6 +14,7 @@ class HookService
     file = pitcher_s3.get_object(key: @document.key).body.read # document from this database / pitcher bucket
 
     Webhook.where(document: @document).each do |webhook|
+      next unless webhook.customer.server_online?
 
       # put the file in the customer bucket
       catcher_s3 = S3.new(webhook.customer.bucket)
@@ -38,10 +39,14 @@ class HookService
         headers: {'Content-Type' => 'application/json'}
       )
 
-
-      response = conn.post(webhook.customer.endpoint) do |req|
-        req.body = payload.to_json
+      begin
+        response = conn.post(webhook.customer.endpoint) do |req|
+          req.body = payload.to_json
+        end
+      rescue Faraday::ConnectionFailed => e
+        response = OpenStruct.new(body: e.inspect, status: 500)
       end
+
 
       puts response.body
     end

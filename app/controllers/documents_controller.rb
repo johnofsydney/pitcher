@@ -10,7 +10,15 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1 or /documents/1.json
   def show
+    # @online = server_online?(server_url)
   end
+
+
+
+# Replace 'http://example.com' with the URL of the server you want to ping
+# server_url = 'http://example.com'
+# server_online?(server_url)
+
 
   # GET /documents/new
   def new
@@ -23,8 +31,18 @@ class DocumentsController < ApplicationController
 
   # POST /documents or /documents.json
   def create
+    # TODO use the save to s3 method
+
     file = params[:document][:file]
-    @document = Document.new(document_params)
+
+    link = save_to_s3(params)[:link]
+    key = save_to_s3(params)[:key]
+
+    @document = Document.new(
+      document_params.merge(
+        {link: link, key: key}
+      )
+    )
 
     respond_to do |format|
       if @document.save
@@ -37,8 +55,7 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /documents/1 or /documents/1.json
-  def update
+  def save_to_s3(params)
     file = params[:document][:file]
     bucket = S3.new(S3::BUCKET)
     key = "document-#{Time.zone.today}-#{file.original_filename}"
@@ -46,7 +63,16 @@ class DocumentsController < ApplicationController
       key: key,
       body: file.tempfile
     )
-    link = upload_results[:address]
+    {
+      link: upload_results[:address],
+      key: key
+    }
+  end
+
+  # PATCH/PUT /documents/1 or /documents/1.json
+  def update
+    link = save_to_s3(params)[:link]
+    key = save_to_s3(params)[:key]
 
     respond_to do |format|
       if @document.update(

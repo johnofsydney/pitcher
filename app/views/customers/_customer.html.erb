@@ -1,6 +1,6 @@
 <div id="<%= dom_id customer %>" class="card mb-3">
   <div class="card-body">
-    <h4 class="card-title"><%= customer.name %></h4>
+    <h4 class="card-title"><%= customer.name %><%= customer.server_online? ? '' : ' (Offline)'  %>  </h4>
     <p class="card-text"><strong>URL:</strong> <%= customer.url %></p>
     <p style="margin-left: 20px; margin-top: -10px"><i>This is the URL for customer's server</i></p>
     <p class="card-text"><strong>Endpoint:</strong> <%= customer.endpoint %></p>

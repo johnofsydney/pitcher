@@ -42,7 +42,8 @@
         </div>
 
         <div>
-          <%= link_to "Cancel", webhook_path, class: "btn btn-secondary" %>
+          <% path = webhook.id.present? ? webhook_path : webhooks_path %>
+          <%= link_to "Cancel", path, class: "btn btn-secondary" %>
         </div>
       </div>
     </div>
