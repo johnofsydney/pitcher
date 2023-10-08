@@ -38,7 +38,8 @@
       </div>
 
       <div>
-        <%= link_to "Cancel", customer_path, class: "btn btn-secondary" %>
+        <% path = @customer.id.present?  ? customer_path : customers_path %>
+        <%= link_to "Cancel", path, class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
