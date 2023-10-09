@@ -28,7 +28,8 @@ class HookService
         token: webhook.token,                 # required
         link: save_results[:address],         # do send this link, but be aware that it could be constructed in the customer app using the bucket and key
         bucket: webhook.customer.bucket,
-        key: @document.key
+        key: @document.key,
+        description: @document.description
       }
 
       # https://httpbin.org/post

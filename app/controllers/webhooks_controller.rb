@@ -25,6 +25,8 @@ class WebhooksController < ApplicationController
 
     respond_to do |format|
       if @webhook.save
+        HookService.call(@webhook.document) # TODO: adapt this hook service to work with only _this_ webhook
+
         format.html { redirect_to webhook_url(@webhook), notice: "Webhook was successfully created." }
         format.json { render :show, status: :created, location: @webhook }
       else
@@ -45,7 +47,7 @@ class WebhooksController < ApplicationController
     if document_has_changed?(params)
       # invoked the hook service to send the new document to the customer
     else
-    end
+  end
 
 
 
