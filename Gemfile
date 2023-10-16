@@ -74,3 +74,6 @@ gem 'devise', '~> 4.8'
 
 gem 'annotate', '~> 3.2'
 gem 'faraday'
+
+gem 'aws-sdk-sqs'
+gem 'shoryuken', '~> 5.0.0'

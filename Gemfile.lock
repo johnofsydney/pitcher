@@ -83,6 +83,9 @@ GEM
       aws-sdk-core (~> 3, >= 3.177.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
+    aws-sdk-sqs (1.62.0)
+      aws-sdk-core (~> 3, >= 3.177.0)
+      aws-sigv4 (~> 1.1)
     aws-sigv4 (1.6.0)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.19)
@@ -205,6 +208,10 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     ruby2_keywords (0.0.5)
+    shoryuken (5.0.6)
+      aws-sdk-core (>= 2)
+      concurrent-ruby
+      thor
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -241,6 +248,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (~> 3.2)
   aws-sdk-s3 (~> 1)
+  aws-sdk-sqs
   bootsnap
   bundler-audit
   debug
@@ -254,6 +262,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.5)
   redis (~> 4.0)
+  shoryuken (~> 5.0.0)
   sprockets-rails
   stimulus-rails
   turbo-rails

@@ -35,21 +35,23 @@ class HookService
       # https://httpbin.org/post
 
       # post payload to the customer endpoint
-      conn = Faraday.new(
-        url: webhook.customer.url,
-        headers: {'Content-Type' => 'application/json'}
-      )
+      # conn = Faraday.new(
+      #   url: webhook.customer.url,
+      #   headers: {'Content-Type' => 'application/json'}
+      # )
 
-      begin
-        response = conn.post(webhook.customer.endpoint) do |req|
-          req.body = payload.to_json
-        end
-      rescue Faraday::ConnectionFailed => e
-        response = OpenStruct.new(body: e.inspect, status: 500)
-      end
+      # begin
+      #   response = conn.post(webhook.customer.endpoint) do |req|
+      #     req.body = payload.to_json
+      #   end
+      # rescue Faraday::ConnectionFailed => e
+      #   response = OpenStruct.new(body: e.inspect, status: 500)
+      # end
+
+      FaradayPoster.perform_later(webhook.customer.url, webhook.customer.endpoint, payload)
 
 
-      puts response.body
+      # puts response.body
     end
 
 
