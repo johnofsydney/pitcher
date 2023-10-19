@@ -1,4 +1,4 @@
-require 'aws/s3'
+# require 'aws/s3'
 
 class DocumentsController < ApplicationController
   before_action :set_document, only: %i[ show edit update destroy ]

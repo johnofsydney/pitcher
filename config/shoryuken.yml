@@ -1,14 +1,6 @@
-# # FILEPATH: /Users/john/Projects/John/damian/pitcher/config/shoryuken.yml
+# FILEPATH: /Users/john/Projects/John/damian/pitcher/config/shoryuken.yml
 
-# :concurrency: 10
-# :queues:
-#   - [default, 5]
-#   - [mailers, 2]
-#   - [low_priority, 3]
-#   - [pitcher_default, 3]
-
-# :aws:
-#   access_key_id: <%= Rails.application.credentials.aws[:access_key_id] %>
-#   secret_access_key: <%= Rails.application.credentials.aws[:secret_access_key] %>
-#   region: 'ap-southeast-2'
-#   # region:  <%= Rails.application.credentials.aws[:region] %>
+concurrency: 10
+delay: 120
+queues:
+  - [pitcher_default, 1]
