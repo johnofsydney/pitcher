@@ -1,6 +1,0 @@
-# FILEPATH: /Users/john/Projects/John/damian/pitcher/config/shoryuken.yml
-
-concurrency: 10
-delay: 120
-queues:
-  - [pitcher_default, 1]

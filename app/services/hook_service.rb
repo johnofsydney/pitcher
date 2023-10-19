@@ -12,11 +12,11 @@ class HookService
   def call
     pitcher_s3 = S3.new(S3::BUCKET)
     file = pitcher_s3.get_object(key: @document.key).body.read # document from this database / pitcher bucket
-    # binding.pry
+
     Webhook.where(document: @document).each do |webhook|
       next unless webhook.customer.server_online?
 
-      # put the file in the customer bucket
+      put the file in the customer bucket
       catcher_s3 = S3.new(webhook.customer.bucket)
       save_results = catcher_s3.put_object(
         key: @document.key,
@@ -26,7 +26,7 @@ class HookService
       # construct a payload to send to the customer application, linking the record in their database to the new file in their bucket
       payload = {
         token: webhook.token,                 # required
-        link: save_results[:address],         # do send this link, but be aware that it could be constructed in the customer app using the bucket and key
+        link: @document.link,         # do send this link, but be aware that it could be constructed in the customer app using the bucket and key
         bucket: webhook.customer.bucket,
         key: @document.key,
         description: @document.description
@@ -34,24 +34,25 @@ class HookService
 
       # https://httpbin.org/post
 
-      # post payload to the customer endpoint
-      # conn = Faraday.new(
-      #   url: webhook.customer.url,
-      #   headers: {'Content-Type' => 'application/json'}
-      # )
+      post payload to the customer endpoint
+      conn = Faraday.new(
+        url: webhook.customer.url,
+        headers: {'Content-Type' => 'application/json'}
+      )
 
-      # begin
-      #   response = conn.post(webhook.customer.endpoint) do |req|
-      #     req.body = payload.to_json
-      #   end
-      # rescue Faraday::ConnectionFailed => e
-      #   response = OpenStruct.new(body: e.inspect, status: 500)
-      # end
+      begin
+        response = conn.post(webhook.customer.endpoint) do |req|
+          req.body = payload.to_json
+        end
+      rescue Faraday::ConnectionFailed => e
+        response = OpenStruct.new(body: e.inspect, status: 500)
+      end
 
-      FaradayPoster.perform_later(webhook.customer.url, webhook.customer.endpoint, payload)
+      # FaradayPoster.delay.perform(webhook.customer.url, webhook.customer.endpoint, payload)
+      # FaradayPoster.perform_later(webhook.customer.url, webhook.customer.endpoint, payload)
 
 
-      # puts response.body
+      puts response.body
     end
 
 

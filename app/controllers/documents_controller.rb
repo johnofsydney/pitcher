@@ -83,7 +83,9 @@ class DocumentsController < ApplicationController
         format.html do
 
           # HookService.new(@document).call
-          HookConductor.perform_later(@document.id)
+          # HookConductor.perform_later(@document.id)
+          # HookConductor.delay.perform(@document.id)
+          HookService.new(@document).call
 
 
           redirect_to document_url(@document), notice: "Document was successfully updated."

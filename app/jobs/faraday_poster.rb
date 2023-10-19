@@ -1,5 +1,5 @@
 class FaradayPoster < ApplicationJob
-  queue_as 'pitcher_default' # AWS SQS Queue
+  queue_as 'pitcher_delayed_job'
 
   def perform(url, endpoint, payload)
 
