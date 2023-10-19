@@ -6,5 +6,6 @@ class TestJob < ApplicationJob
     document   = Document.find(document_id)
     # perform your task on resource ...
     p "document: #{document.description}"
+    100
   end
 end

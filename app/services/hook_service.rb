@@ -12,7 +12,7 @@ class HookService
   def call
     pitcher_s3 = S3.new(S3::BUCKET)
     file = pitcher_s3.get_object(key: @document.key).body.read # document from this database / pitcher bucket
-
+    # binding.pry
     Webhook.where(document: @document).each do |webhook|
       next unless webhook.customer.server_online?
 
