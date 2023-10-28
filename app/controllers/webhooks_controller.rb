@@ -23,6 +23,9 @@ class WebhooksController < ApplicationController
   def create
     @webhook = Webhook.new(webhook_params)
 
+    # create a webhook token if it is not provided:
+    @webhook.token = SecureRandom.hex(16) if @webhook.token.blank?
+
     respond_to do |format|
       if @webhook.save
         HookService.call(@webhook.document) # TODO: adapt this hook service to work with only _this_ webhook
@@ -36,19 +39,10 @@ class WebhooksController < ApplicationController
     end
   end
 
-
-
-  def document_has_changed?(params)
-    @webhook.document.id != params[:webhook][:document_id].to_i
-  end
-  # PATCH/PUT /webhooks/1 or /webhooks/1.json
   def update
-    # if document_has_changed?(params)
-    #   # invoked the hook service to send the new document to the customer
-    # else
     respond_to do |format|
       if @webhook.update(webhook_params)
-        HookService.call(@webhook.document) # TODO: adapt this hook service to work with only _this_ webhook
+        HookService.call(@webhook.document) # Remove this and let all posting be done on a cron
 
         format.html { redirect_to webhook_url(@webhook), notice: "Webhook was successfully updated." }
         format.json { render :show, status: :ok, location: @webhook }
