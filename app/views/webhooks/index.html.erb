@@ -7,8 +7,34 @@
 <div class="container">
   <h1>Webhooks</h1>
 
+  <div class="row">
+    <div class="col-md-4">
+      <p class="mb-4">A Webhook in Pitcher identifies a document which is subscribed to by a particular customer. Each customer can have subscribe to many documents, each document can be subscribed to by many customers.</p>
+
+      <p class="mb-4">An administrator of Pitcher can subscribe any customer to any document by selecting the customer and the document. A customer with a login to Pitcher can select any document and it will be automatically linked to that customer. </p>
+    </div>
+    <div class="col-md-4">
+      <p class="mb-4">The webhook also requires a token. If a customer is subscribing to updates for a document they already have, they can provide a token. If the customer does not already have the document, the token field can be left blank and a token will be generated.</p>
+
+      <p class="mb-4">The token must be stored in the customer database, and is used to identify the document in the customer's database. It is expected that if a record cannot be found in the customer's database, that one will be created.</p>
+    </div>
+
+    <div class="col-md-4">
+      <p class="mb-4">Every time a document is updated on Pitcher, if the customer has a webhook corresponding to that document, then Pitcher will send a payload to their server</p>
+      <hr class="my-4">
+      <h4>Example Payload</h4>
+      <pre><code>
+      payload = {
+        token: '1c407a29ac9cefb005c056ae5b16e2ab',
+        description: '1:200 Contour Map of the North Pole',
+        link: 'http://pitcher-bucket.s3.us-east-1.amazonaws.com/document-2023-10-30-Screenshot 2023-10-04 at 10.31.15 pm.png'
+      }
+      </code></pre>
+    </div>
+  </div>
+  <hr>
   <div id="webhooks">
-    <table class="table table-striped">
+    <table id="webhooksTable" class="table table-striped">
       <thead>
         <tr>
           <th>Customer</th>
@@ -23,11 +49,11 @@
         <% @webhooks.each do |webhook| %>
           <tr id="<%= dom_id webhook %>">
             <td><%= link_to "#{webhook.customer.name}", webhook.customer, class: "text-decoration-none" %> </td>
-            <td><%= link_to "#{webhook.customer.url}", webhook.customer.url, class: "text-decoration-none" %> </td>
-            <td><%= webhook.document.description %></td>
+            <td><%= webhook.customer.url %> </td>
+            <td><%= link_to "#{webhook.document.description}", document_path(webhook.document), class: "text-decoration-none" %> </td>
             <td><%= webhook.customer.endpoint %></td>
             <td><%= webhook.token %></td>
-            <td><%= link_to 'Edit', edit_webhook_path(webhook), class: "btn btn-primary" %></td>
+            <td><%= link_to 'Show', webhook_path(webhook), class: "btn btn-primary" %></td>
           </tr>
         <% end %>
       </tbody>
@@ -36,5 +62,11 @@
 
   <%= link_to "New webhook", new_webhook_path, class: "btn btn-success" %>
 
-  <%= render partial: 'menus/footer' %>
+  
 </div>
+
+<script>
+$(document).ready(function() {
+  $('#webhooksTable').DataTable();
+});
+</script>

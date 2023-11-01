@@ -28,9 +28,16 @@
     </div>
 
     <div class="mb-3">
-      <%= form.label :bucket, class: "form-label" %>
-      <%= form.text_field :bucket, class: "form-control" %>
+      <%= form.label :strategy, class: "form-label" %>
+      <%= form.select :strategy, Customer.strategies.keys.map { |s| [s.humanize, s] }, {}, class: "form-control" %>
     </div>
+
+    <% if customer.bucket? %>
+      <div class="mb-3">
+        <%= form.label :bucket, class: "form-label" %>
+        <%= form.text_field :bucket, class: "form-control" %>
+      </div>
+    <% end %>
 
     <div class="d-flex justify-content-between align-items-center">
       <div>

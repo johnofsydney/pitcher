@@ -1,3 +1,16 @@
 .bg-gradient-primary {
   background: linear-gradient(to bottom, #4e73df, #224abe);
 }
+
+.custom-select-arrow {
+  position: relative;
+}
+
+.custom-select-arrow::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

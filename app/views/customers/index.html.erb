@@ -1,38 +1,43 @@
 <% if notice.present? %>
-  <p class="alert alert-success"><%= notice %></p>
+  <div class="alert alert-success" role="alert"><%= notice %></div>
 <% end %>
 
 <div class="container">
-  <h1>Customers</h1>
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="my-4">Customers</h1>
 
-  <div id="customers">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>URL</th>
-          <th>Endpoint</th>
-          <th>Bucket</th>
-          <th>Online</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @customers.each do |customer| %>
-          <tr>
-            <td><%= link_to customer.name, customer %></td>
-            <td><%= link_to customer.url, customer.url %></td>
-            <td><%= customer.endpoint %></td>
-            <td><%= customer.bucket %></td>
-            <td><%= customer.server_online? %></td>
-            <td><%= link_to 'Edit', edit_customer_path(customer), class: 'btn btn-primary' %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+      <p class="mb-4">A Customer in Pitcher is a company or organisation which has a login to Pitcher. Each customer requires a URL and an endpoint which can receive a POST request.</p>
+      <p class="mb-4">New Customers can only be added by Picher Administrators. Customers can be edited by Pitcher Administrators and by the customer themselves</p>
+
+      <div id="customers">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>URL</th>
+              <th>Online</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td><%= link_to customer.name, customer %></td>
+                <td><%= link_to customer.url, customer.url %></td>
+                <td><%= customer.server_online? %></td>
+                <td><%= link_to 'Show', customer_path(customer), class: 'btn btn-primary' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <%= link_to "New customer", new_customer_path, class: "btn btn-success my-4" %>
+
+      <hr class="my-4">
+
+      <%= render partial: 'menus/footer' %>
+    </div>
   </div>
-
-  <%= link_to "New customer", new_customer_path, class: "btn btn-success" %>
-
-  <%= render partial: 'menus/footer' %>
 </div>

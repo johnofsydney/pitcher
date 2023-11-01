@@ -1,7 +1,12 @@
 class Customer < ApplicationRecord
   has_many :webhooks
 
-    require 'faraday'
+  validates :name, presence: true
+  validates :url, presence: true, format: { with: URI.regexp }
+  validates :endpoint, presence: true
+  enum strategy: { hotlink: 'hotlink', bucket: 'bucket', binary: 'binary' }
+
+  require 'faraday'
 
   def server_online?(url = self.url)
     begin

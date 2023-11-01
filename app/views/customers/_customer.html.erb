@@ -5,8 +5,20 @@
     <p style="margin-left: 20px; margin-top: -10px"><i>This is the URL for customer's server</i></p>
     <p class="card-text"><strong>Endpoint:</strong> <%= customer.endpoint %></p>
     <p style="margin-left: 20px; margin-top: -10px"><i>Specific path to which a payload will be sent whenever a subscribed document is updated</i></p>
-    <p class="card-text"><strong>Bucket:</strong> <%= customer.bucket %></p>
-    <p style="margin-left: 20px; margin-top: -10px"><i>AWS S3 Bucket. Owned by the customer. Pitcher app has access to add files into this bucket. This access is granted and managed by the customer</i></p>
+
+    <p class="card-text"><strong>Strategy:</strong> <%= customer.strategy %></p>
+    <p style="margin-left: 20px; margin-top: -10px"><i>How will Pitcher send updates</i>
+      <ul>
+        <li><strong>hotlink:</strong> Send a link to the latest document on the Pitcher server</li>
+        <li><strong>bucket:</strong> Add the document into the Customer's AWS S3 (Cloud storage) bucket, and send a link to file in that location</li>
+        <li><strong>binary:</strong> Send the binary file itself</li>
+      </ul>
+    </p>
+    <% if customer.bucket? %>
+      <p class="card-text"><strong>Bucket:</strong> <%= customer.bucket %></p>
+      <p style="margin-left: 20px; margin-top: -10px"><i>AWS S3 Bucket. Owned by the customer. Pitcher app has access to add files into this bucket. This access is granted and managed by the customer</i></p>
+    <% end  %>
+    
   </div>
   <div id="webhooks" class="card-body">
     <h6 class="card-subtitle mb-2 text-muted">Subscribed Documents (Webhooks)</h6>
@@ -23,7 +35,7 @@
           <tr id="<%= dom_id webhook %>">
             <td><%= webhook.document.description %></td>
             <td><%= webhook.token %></td>
-            <td><%= link_to 'Edit', edit_webhook_path(webhook), class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Show', webhook_path(webhook), class: 'btn btn-primary' %></td>
           </tr>
         <% end %>
       </tbody>

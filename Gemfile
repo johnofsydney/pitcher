@@ -75,3 +75,4 @@ gem 'devise', '~> 4.8'
 gem 'annotate', '~> 3.2'
 gem 'faraday'
 
+gem 'delayed_job_active_record'
