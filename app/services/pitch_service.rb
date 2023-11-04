@@ -11,8 +11,7 @@ class PitchService
   end
 
   def call
-    return unless webhook.customer.server_online?
-    strategy = :hotlink
+    raise RuntimeError unless webhook.customer.server_online?
 
     # construct a payload of basic doc params required
     base_payload = {
@@ -22,7 +21,6 @@ class PitchService
 
     # adjust the payload according to the strategy
     if webhook.customer.hotlink?
-    # if strategy == :hotlink
       payload = base_payload.merge({link: @document.link})
     elsif webhook.customer.bucket?
       pitcher_s3 = S3.new(S3::BUCKET)

@@ -1,7 +1,7 @@
 <div class="card mb-3">
   <div class="card-body">
     <h5 class="card-title font-italic" style="margin-bottom: 20px">Webhook [<%= webhook.id %>] for <%= webhook.customer.name %></h5>
-    <p class="card-text"><strong>Document:</strong> <%= webhook.document.description %></p>
+    <p class="card-text"><strong>Document: <%= link_to webhook.document.description, webhook.document %></p>
     <p class="card-text"><strong>Webhook endpoint:</strong> <%= webhook.customer.endpoint %></p>
     <p class="card-text"><strong>Webhook token:</strong> <%= webhook.token %></p>
   </div>

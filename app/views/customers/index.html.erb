@@ -2,9 +2,7 @@
   <div class="alert alert-success" role="alert"><%= notice %></div>
 <% end %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
+  <div>
       <h1 class="my-4">Customers</h1>
 
       <p class="mb-4">A Customer in Pitcher is a company or organisation which has a login to Pitcher. Each customer requires a URL and an endpoint which can receive a POST request.</p>
@@ -36,8 +34,4 @@
       <%= link_to "New customer", new_customer_path, class: "btn btn-success my-4" %>
 
       <hr class="my-4">
-
-      <%= render partial: 'menus/footer' %>
-    </div>
   </div>
-</div>

@@ -3,39 +3,33 @@
 <% end %>
 
 <div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <h1 class="my-4">Documents</h1>
+  <h1 class="my-4">Documents</h1>
 
-      <p class="mb-4">List of all of the documents controlled by Pitcher. A Customer can subscribe to any of these documents.</p>
+  <p class="mb-4">List of all of the documents controlled by Pitcher. A Customer can subscribe to any of these documents.</p>
 
-      <hr>
-      <div id="documents">
-        <table id="documentsTable" class="table table-striped">
-          <thead>
-            <tr>
-              <th>Description</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @documents.each do |document| %>
-              <tr>
-                <td><%= document.description %></td>
-                <td><%= link_to 'Show', document, class: 'btn btn-primary' %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-
-      <%= link_to "New document", new_document_path, class: "btn btn-success my-4" %>
-
-      <hr class="my-4">
-
-      <%= render partial: 'menus/footer' %>
-    </div>
+  <hr>
+  <div id="documents">
+    <table id="documentsTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @documents.each do |document| %>
+          <tr>
+            <td><%= document.description %></td>
+            <td><%= link_to 'Show', document, class: 'btn btn-primary' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+
+  <%= link_to "New document", new_document_path, class: "btn btn-success my-4" %>
+
+  <hr class="my-4">
 </div>
 
 <script>

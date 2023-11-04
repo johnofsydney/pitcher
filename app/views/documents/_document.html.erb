@@ -7,7 +7,14 @@
         <p class="card-text"><strong>Description:</strong> <%= document.description %></p>
         <p class="card-text"><strong>Expiry date:</strong> <%= document.expiry_date %></p>
         <p class="card-text"><strong>Link:</strong> <%= document.link %></p>
-        <img src="<%= document.link %>" alt="Document Image" class="img-fluid mb-3">
+
+        <% if document.is_image? %>
+          <p class="card-text"><strong> <%= link_to "Download", document.link %></strong></p>
+          <img src="<%= document.link %>" alt="Document Image" class="img-fluid mb-3">
+        <% else %>
+          <%= link_to "Download Document", document.link, class: "btn btn-primary" %>
+        <% end %>
+
       </div>
     </div>
   </div>
@@ -22,6 +29,7 @@
               <li class="list-group-item">
                 <%= link_to webhook.customer.name, webhook, class: "text-decoration-none" %>
                 <%= webhook.customer.server_online? ? nil : "| Offline" %>
+                <%= "| #{webhook.token}" %>
               </li>
             <% end %>
           </ul>

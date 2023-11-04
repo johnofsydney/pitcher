@@ -4,10 +4,8 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
   <%= link_to "Edit this webhook", edit_webhook_path(@webhook), class: "btn btn-primary" %>
-  <%= link_to "Back to webhooks", webhook_path, class: "btn btn-secondary" %>
+  <%= link_to "Back to webhooks", webhooks_path, class: "btn btn-secondary" %>
   <% if @current_user&.can_destroy? || true %>
     <%= button_to "Destroy this webhook", @webhook, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
   <% end %>
 </div>
-
-<%= render partial: 'menus/footer' %>
