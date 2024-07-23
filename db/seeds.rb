@@ -42,19 +42,19 @@ document_seed_records = [
 customer_seed_records = [
   {
     name: "Acme Corp", # subscribes to everything
-    url: 'localhost:3001',
-    endpoint: '/documents',
+    url: 'http://localhost:3001',
+    endpoint: '/updates',
     bucket: 'acme-bucket-100'
   },
   {
     name: "Globex Corp", # subscribes to fine art
-    url: 'localhost:3002',
+    url: 'http://localhost:3002',
     endpoint: '/glob',
     bucket: 'globex-bucket'
   },
   {
     name: "Soylent Corp", # subscribes to salad and dynamite
-    url: 'localhost:3003',
+    url: 'http://localhost:3003',
     endpoint: '/soy-boy',
     bucket: 'soylent-bucket'
   }
