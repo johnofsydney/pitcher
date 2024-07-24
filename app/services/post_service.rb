@@ -1,10 +1,6 @@
 class PostService
   attr_reader :url, :endpoint, :payload
 
-  # def self.call(url:, endpoint:, payload:)
-  #   new(url:, endpoint:, payload:).call
-  # end
-
   def initialize(url, endpoint, payload)
     @url = url
     @endpoint = endpoint
@@ -12,8 +8,6 @@ class PostService
   end
 
   def call
-    # https://httpbin.org/post
-
     # post payload to the customer endpoint
     conn = Faraday.new(
       url: url,

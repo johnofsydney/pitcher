@@ -18,3 +18,5 @@ Documents are saved to AWS S3 using the AWS SDK. Keys are saved in the Rails cre
 Webhooks are sent using Faraday
 
 Authentication is deliberately left unimplemented. It would be required for real world use.
+
+Use images as the documents.
